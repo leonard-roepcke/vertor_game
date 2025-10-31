@@ -9,6 +9,7 @@ class PygameApp:
         pygame.display.set_caption("Vector game")
         self.running = True
 
+        self.center = (self.SCREEN_SIZE[0] // 2, self.SCREEN_SIZE[1] // 2)
         self.grid_step = 100
         self.grid_count = 10     
         self.arrow_size = 30
@@ -32,7 +33,7 @@ class PygameApp:
         return True
     
     def draw_coordinates(self):
-        center = (self.SCREEN_SIZE[0] // 2, self.SCREEN_SIZE[1] // 2)
+        center = self.center
         grid_step = self.grid_step
         grid_count = self.grid_count     
         arrow_size = self.arrow_size
@@ -91,8 +92,43 @@ class PygameApp:
             # Links/rechts der Achse
             pygame.draw.line(self.screen, (0,255,0), (center[0]-tick_width, y), (center[0]+tick_width, y), line_width)
 
-    def draw_vector(self):
-        pass
+    def draw_vector(self, pos):
+        """
+        pos: Tuple (x, y) in Einheiten, z.B. (1,2)
+        Zeichnet einen Pfeil vom Ursprung zum Punkt pos
+        """
+        center = self.center
+        grid_step = self.grid_step
+        arrow_size = self.arrow_size
+        arrow_width = self.arrow_width
+        line_width = self.line_width
+
+        # Zielpunkt in Pixel
+        end_x = center[0] + pos[0] * grid_step
+        end_y = center[1] - pos[1] * grid_step  # y nach oben, darum minus
+
+        # Linie zeichnen
+        pygame.draw.line(self.screen, (255,255,0), center, (end_x, end_y), line_width)
+
+        # Pfeilspitze berechnen
+        # Winkel des Vektors
+        import math
+        dx = end_x - center[0]
+        dy = end_y - center[1]
+        angle = math.atan2(dy, dx)
+
+        # Linien für Pfeilspitze
+        left_angle = angle + math.pi * 3/4  # 135 Grad
+        right_angle = angle - math.pi * 3/4
+
+        left_x = end_x + arrow_size * math.cos(left_angle)
+        left_y = end_y + arrow_size * math.sin(left_angle)
+        right_x = end_x + arrow_size * math.cos(right_angle)
+        right_y = end_y + arrow_size * math.sin(right_angle)
+
+        pygame.draw.line(self.screen, (255,255,0), (end_x, end_y), (left_x, left_y), line_width)
+        pygame.draw.line(self.screen, (255,255,0), (end_x, end_y), (right_x, right_y), line_width)
+
     def escape(self):
         keys = pygame.key.get_pressed()
 
