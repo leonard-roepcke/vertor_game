@@ -74,6 +74,7 @@ class PygameApp:
                         (center[0]+arrow_width, center[1]+grid_count*grid_step-arrow_size), line_width*2)
         # --- Markierungen auf X-Achse ---
         for i in range(-grid_count+1, grid_count):
+            if i==0: continue 
             x = center[0] + i * grid_step
             tick_height = int(grid_step/5)
             # Oberhalb/unterhalb der Achse
@@ -81,6 +82,7 @@ class PygameApp:
 
         # --- Markierungen auf Y-Achse ---
         for i in range(-grid_count+1, grid_count):
+            if i==0: continue 
             y = center[1] + i * grid_step
             tick_width = int(grid_step/5)
             # Links/rechts der Achse
