@@ -3,7 +3,9 @@ import pygame
 class PygameApp:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((2800, 1600))
+        info = pygame.display.Info()
+        self.SCREEN_SIZE = [info.current_w, info.current_h]
+        self.screen = pygame.display.set_mode(self.SCREEN_SIZE)
         pygame.display.set_caption("Vector game")
         self.running = True
 
