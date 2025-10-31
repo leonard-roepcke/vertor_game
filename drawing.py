@@ -10,22 +10,19 @@ class PygameApp:
 
 
     def loop(self):
+        pygame.display.flip()
         self.screen.fill((0, 0, 0))
         
-        pygame.display.flip()
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return False
         return True
-        #pygame.quit()
     
-    def set_points(self, points):
-        self.points = points
-
-    def add_point(self, point):
-        self.points.append(point)
+    def draw_cordinates(self):
+        pygame.draw.line(self.screen,(255,255,255),(200,200),(300,300),5)
     
-    def update_pos(self):
+    def infput_thigi(self):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_1]:

@@ -1,4 +1,4 @@
 import drawing
 app = drawing.PygameApp()
 while app.loop():
-    pass
+    app.draw_cordinates()
