@@ -9,6 +9,12 @@ class PygameApp:
         pygame.display.set_caption("Vector game")
         self.running = True
 
+        self.grid_step = 100
+        self.grid_count = 10     
+        self.arrow_size = 30
+        self.arrow_width = 20
+        self.line_width = 8
+
     def r_to_w_pos(self, relative_pos):
         return (self.SCREEN_SIZE[0] / 2 + relative_pos[0],
                 self.SCREEN_SIZE[1] / 2 + relative_pos[1])
@@ -27,15 +33,12 @@ class PygameApp:
     
     def draw_coordinates(self):
         center = (self.SCREEN_SIZE[0] // 2, self.SCREEN_SIZE[1] // 2)
-        grid_step = 100
-        grid_count = 10     
-        arrow_size = 30
-        arrow_width = 20
-        line_width = 4
+        grid_step = self.grid_step
+        grid_count = self.grid_count     
+        arrow_size = self.arrow_size
+        arrow_width = self.arrow_width
+        line_width = self.line_width
 
-
-
-        line_width *= 2
 
         # --- Gitterlinien ---
         # horizontale Linien
@@ -88,8 +91,8 @@ class PygameApp:
             # Links/rechts der Achse
             pygame.draw.line(self.screen, (0,255,0), (center[0]-tick_width, y), (center[0]+tick_width, y), line_width)
 
-
-        
+    def draw_vector(self):
+        pass
     def escape(self):
         keys = pygame.key.get_pressed()
 
