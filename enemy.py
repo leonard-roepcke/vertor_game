@@ -15,7 +15,7 @@ class EnemyHandler:
             self.i = 0 
             self.add_enemy(self.random_coord())
         self.i+=self.rate
-        self.rate += 0.01
+        self.rate += 0.001
 
         dt = self.pygame_app.dt
         for enemy in self.enemys:
@@ -52,7 +52,7 @@ class Enemy:
     def __init__(self,handler,pos):
         self.handler = handler
         self.pos = pos
-        self.speed = 0.01
+        self.speed = 0.004
         self.live=0
         self.size=0
     
