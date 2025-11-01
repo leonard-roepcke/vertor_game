@@ -8,6 +8,7 @@ class PygameApp:
         self.screen = pygame.display.set_mode(self.SCREEN_SIZE)
         pygame.display.set_caption("Vector game")
         self.running = True
+        self.clock = pygame.time.Clock()
 
         self.center = (self.SCREEN_SIZE[0] // 2, self.SCREEN_SIZE[1] // 2)
         self.grid_step = 100
@@ -22,6 +23,7 @@ class PygameApp:
 
     def loop(self):
         pygame.display.flip()
+        self.dt = self.clock.tick(0)
         self.screen.fill((0, 0, 0))
         
         
@@ -134,3 +136,6 @@ class PygameApp:
 
         if keys[pygame.K_ESCAPE]:
             return True
+    
+    def draw_enemy(self, pos, size):
+        pygame.draw.circle(self.screen,(255,255,255,0),pos,size)
